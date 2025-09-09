@@ -1,6 +1,16 @@
+import { useSelector, useDispatch } from "react-redux";
 import { FiPlus, FiRefreshCw, FiMoreVertical, FiSearch } from "react-icons/fi";
+import { openAddWidgetModal } from "../features/widgetSlice";
+import CategorySection from "./CategorySection";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.widgets);
+
+  const handleAddWidget = () => {
+    dispatch(openAddWidgetModal(null));
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="border-b border-gray-200 bg-white">
@@ -35,7 +45,10 @@ const Dashboard = () => {
             CNAPP Dashboard
           </h1>
           <div className="flex items-center space-x-3">
-            <button className="flex items-center space-x-2 rounded-md border border-gray-300 bg-white px-4 py-2 hover:bg-gray-50 focus:ring-2 focus:ring-blue-500">
+            <button
+              onClick={handleAddWidget}
+              className="flex items-center space-x-2 rounded-md border border-gray-300 bg-white px-4 py-2 hover:bg-gray-50 focus:ring-2 focus:ring-blue-500"
+            >
               <FiPlus className="h-4 w-4" />
               <span>Add Widget</span>
             </button>
@@ -45,14 +58,20 @@ const Dashboard = () => {
             <button className="rounded-md border border-gray-300 bg-white p-2 hover:bg-gray-50 focus:ring-2 focus:ring-blue-500">
               <FiMoreVertical className="h-4 w-4" />
             </button>
-            <select className="rounded-md border border-blue-900 px-3 py-2 text-blue-900">
+            <select className="rounded-md border border-blue-900 px-3 py-2 font-semibold text-blue-900">
               <option>Last 2 days</option>
             </select>
           </div>
         </div>
 
         <div className="space-y-6">
-          <div className="rounded-lg bg-white p-6 shadow">Content Area</div>
+          {Object.entries(categories).map(([categoryName, widgets]) => (
+            <CategorySection
+              key={categoryName}
+              categoryName={categoryName}
+              widgets={widgets}
+            />
+          ))}
         </div>
       </div>
     </div>
