@@ -19,9 +19,9 @@ const widgetData = {
       data: {
         total: 9659,
         breakdown: [
-          { name: "Failed", value: 1689, color: "#EF4444" },
-          { name: "Warning", value: 681, color: "#FACC15" },
           { name: "Not Available", value: 36, color: "#9CA3AF" },
+          { name: "Warning", value: 681, color: "#FACC15" },
+          { name: "Failed", value: 1689, color: "#EF4444" },
           { name: "Passed", value: 7253, color: "#22C55E" },
         ],
       },
@@ -46,13 +46,15 @@ const widgetData = {
       id: 5,
       name: "Image Risk Assessment",
       type: "bar",
+      tag: "Total Vulnerabilities",
       data: {
         total: 1470,
         breakdown: [
-          { name: "Critical", value: 9, color: "#B91C1C" },
+          { name: "Critical", value: 80, color: "#571a1a" },
           { name: "High", value: 150, color: "#EF4444" },
-          { name: "Medium", value: 478, color: "#F59E0B" },
-          { name: "Low", value: 833, color: "#FACC15" },
+          { name: "Medium", value: 833, color: "#F59E0B" },
+          { name: "Low", value: 450, color: "#FACC15" },
+          { name: "Unknown", value: 80, color: "#9CA3AF" },
         ],
       },
     },
@@ -60,11 +62,15 @@ const widgetData = {
       id: 6,
       name: "Image Security Issues",
       type: "bar",
+      tag: "Total Images",
       data: {
         total: 2,
         breakdown: [
-          { name: "Critical", value: 2, color: "#B91C1C" },
+          { name: "Critical", value: 2, color: "#571a1a" },
           { name: "High", value: 2, color: "#EF4444" },
+          { name: "Medium", value: 2, color: "#F59E0B" },
+          { name: "Low", value: 1.5, color: "#FACC15" },
+          { name: "Unknown", value: 1, color: "#9CA3AF" },
         ],
       },
     },

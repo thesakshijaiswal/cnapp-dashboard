@@ -11,6 +11,8 @@ let nextId =
 
 const initialState = {
   categories: widgetData,
+  isAddWidgetModalOpen: false,
+  selectedCategory: null,
 };
 
 const widgetSlice = createSlice({
@@ -40,9 +42,24 @@ const widgetSlice = createSlice({
         );
       }
     },
+
+    openAddWidgetModal: (state, action) => {
+      state.isAddWidgetModalOpen = true;
+      state.selectedCategory = action.payload;
+    },
+
+    closeAddWidgetModal: (state) => {
+      state.isAddWidgetModalOpen = false;
+      state.selectedCategory = null;
+    },
   },
 });
 
-export const { addWidget, removeWidget } = widgetSlice.actions;
+export const {
+  addWidget,
+  removeWidget,
+  openAddWidgetModal,
+  closeAddWidgetModal,
+} = widgetSlice.actions;
 
 export default widgetSlice.reducer;
