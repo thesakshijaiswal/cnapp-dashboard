@@ -2,10 +2,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { FiPlus, FiRefreshCw, FiMoreVertical, FiSearch } from "react-icons/fi";
 import { openAddWidgetModal } from "../features/widgetSlice";
 import CategorySection from "./CategorySection";
+import AddWidgetModal from "./AddWidgetModel";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const { categories } = useSelector((state) => state.widgets);
+  const { categories, isAddWidgetModalOpen } = useSelector(
+    (state) => state.widgets,
+  );
 
   const handleAddWidget = () => {
     dispatch(openAddWidgetModal(null));
@@ -74,6 +77,7 @@ const Dashboard = () => {
           ))}
         </div>
       </div>
+      {isAddWidgetModalOpen && <AddWidgetModal />}
     </div>
   );
 };
