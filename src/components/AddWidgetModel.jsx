@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { FiX, FiPlus } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import {
   closeAddWidgetModal,
   addWidget,
@@ -9,6 +9,8 @@ import {
 import WidgetCreationForm from "./WidgetCreationForm";
 import widgetData from "../data/widgetData";
 import ModalTabNavigation from "./ModalTabNavigation";
+import WidgetModalHeader from "./WidgetModalHeader";
+import WidgetSelectionList from "./WidgetSelectionList";
 
 const AddWidgetModal = () => {
   const dispatch = useDispatch();
@@ -133,12 +135,7 @@ const AddWidgetModal = () => {
       <div className="flex-1 bg-black/50" onClick={handleClose}></div>
 
       <div className="flex h-full w-full flex-col bg-white shadow-2xl sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-2/5">
-        <div className="flex flex-shrink-0 items-center justify-between bg-indigo-900 px-4 py-4 sm:px-6">
-          <h2 className="text-lg font-medium text-white">Add Widget</h2>
-          <button onClick={handleClose}>
-            <FiX className="h-5 w-5 text-white" />
-          </button>
-        </div>
+        <WidgetModalHeader onClose={handleClose} />
 
         <div className="flex-shrink-0 border-b border-gray-100 px-4 py-3 sm:px-6">
           <p className="text-sm text-gray-600">
@@ -157,32 +154,11 @@ const AddWidgetModal = () => {
         <div className="flex-1 overflow-y-auto p-4 sm:p-6">
           {!showCreateForm ? (
             <>
-              <div className="space-y-3">
-                {availableWidgets[activeTab]?.length > 0 ? (
-                  availableWidgets[activeTab].map((widgetName) => (
-                    <label
-                      key={widgetName}
-                      className="flex cursor-pointer items-start space-x-3 rounded-lg border border-gray-100 p-3 hover:bg-gray-50"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedWidgets.has(widgetName)}
-                        onChange={() => handleWidgetToggle(widgetName)}
-                        className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-gray-300 accent-black focus:ring-blue-500"
-                      />
-                      <span className="flex-1 text-sm break-words text-gray-700">
-                        {widgetName}
-                      </span>
-                    </label>
-                  ))
-                ) : (
-                  <p className="py-8 text-center text-sm text-gray-500">
-                    {activeTab === "Ticket"
-                      ? "No widgets available to add or remove for Ticket category"
-                      : "No widgets available for this category"}
-                  </p>
-                )}
-              </div>
+              <WidgetSelectionList
+                widgets={availableWidgets[activeTab]}
+                selectedWidgets={selectedWidgets}
+                onToggle={handleWidgetToggle}
+              />
 
               <div className="my-6 border-t border-gray-200"></div>
 
