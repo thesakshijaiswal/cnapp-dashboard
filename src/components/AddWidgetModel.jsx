@@ -59,6 +59,20 @@ const AddWidgetModal = () => {
     handleClose();
   };
 
+  const handleCreateWidget = (e) => {
+    e.preventDefault();
+    if (newWidgetForm.name.trim() && newWidgetForm.text.trim()) {
+      dispatch(
+        addWidget({
+          category: newWidgetForm.category,
+          widgetName: newWidgetForm.name,
+          widgetText: newWidgetForm.text,
+        }),
+      );
+      handleClose();
+    }
+  };
+
   const handleWidgetToggle = (widgetName) => {
     const newSelected = new Set(selectedWidgets);
     if (newSelected.has(widgetName)) {
@@ -175,7 +189,13 @@ const AddWidgetModal = () => {
               </div>
             </>
           ) : (
-            <WidgetCreationForm />
+            <WidgetCreationForm
+              categories={categories}
+              newWidgetForm={newWidgetForm}
+              setNewWidgetForm={setNewWidgetForm}
+              handleCreateWidget={handleCreateWidget}
+              onBack={() => setShowCreateForm(false)}
+            />
           )}
         </div>
 
