@@ -7,6 +7,7 @@ import {
   removeWidget,
 } from "../features/widgetSlice";
 import WidgetCreationForm from "./WidgetCreationForm";
+import widgetData from "../data/widgetData";
 
 const AddWidgetModal = () => {
   const dispatch = useDispatch();
@@ -40,13 +41,17 @@ const AddWidgetModal = () => {
 
     selectedWidgets.forEach((widgetName) => {
       if (!existingWidgetNames.has(widgetName)) {
-        dispatch(
-          addWidget({
-            category: activeTab,
-            widgetName: widgetName,
-            widgetText: `${widgetName} content`,
-          }),
+        const widgetFromData = widgetData[activeTab]?.find(
+          (w) => w.name === widgetName,
         );
+        if (widgetFromData) {
+          dispatch(
+            addWidget({
+              category: activeTab,
+              widget: widgetFromData,
+            }),
+          );
+        }
       }
     });
 
@@ -65,8 +70,12 @@ const AddWidgetModal = () => {
       dispatch(
         addWidget({
           category: newWidgetForm.category,
-          widgetName: newWidgetForm.name,
-          widgetText: newWidgetForm.text,
+          widget: {
+            id: Date.now(),
+            name: newWidgetForm.name,
+            type: "text",
+            data: { text: newWidgetForm.text },
+          },
         }),
       );
       handleClose();
@@ -85,10 +94,20 @@ const AddWidgetModal = () => {
 
   const availableWidgets = useMemo(() => {
     const widgets = {};
-    Object.entries(categories).forEach(([categoryName, categoryWidgets]) => {
+    Object.entries(widgetData).forEach(([categoryName, categoryWidgets]) => {
       widgets[categoryName] = categoryWidgets.map((widget) => widget.name);
     });
-    widgets["Ticket"] = [];
+
+    Object.entries(categories).forEach(([categoryName, categoryWidgets]) => {
+      const existing = widgets[categoryName] || [];
+      const custom = categoryWidgets
+        .filter((w) => !existing.includes(w.name))
+        .map((w) => w.name);
+
+      widgets[categoryName] = [...existing, ...custom];
+    });
+
+    widgets["Ticket"] = widgets["Ticket"] || [];
     return widgets;
   }, [categories]);
 
@@ -101,10 +120,8 @@ const AddWidgetModal = () => {
 
   useEffect(() => {
     if (activeTab && categories[activeTab]) {
-      const existingWidgetNames = categories[activeTab].map(
-        (widget) => widget.name,
-      );
-      setSelectedWidgets(new Set(existingWidgetNames));
+      const activeWidgetNames = categories[activeTab].map((w) => w.name);
+      setSelectedWidgets(new Set(activeWidgetNames));
     } else {
       setSelectedWidgets(new Set());
     }

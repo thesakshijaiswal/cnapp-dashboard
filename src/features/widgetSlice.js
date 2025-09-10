@@ -20,12 +20,13 @@ const widgetSlice = createSlice({
   initialState,
   reducers: {
     addWidget: (state, action) => {
-      const { category, widgetName, widgetText } = action.payload;
+      const { category, widget } = action.payload;
       const newWidget = {
-        id: nextId++,
-        name: widgetName,
-        type: "text",
-        data: { text: widgetText },
+        id: widget.id || nextId++,
+        name: widget.name,
+        type: widget.type,
+        tag: widget.tag || null,
+        data: widget.data,
       };
 
       if (!state.categories[category]) {
