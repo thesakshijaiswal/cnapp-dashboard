@@ -5,6 +5,7 @@ import CategorySection from "./CategorySection";
 import AddWidgetModal from "./AddWidgetModel";
 import Header from "./Header";
 import { FiPlus, FiRefreshCw, FiMoreVertical } from "react-icons/fi";
+import NotFound from "./NotFound";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -69,11 +70,7 @@ const Dashboard = () => {
         </div>
 
         <div className="space-y-6 px-2">
-          {!hasResults && (
-            <div className="text-center text-gray-500 italic">
-              No results found for "{searchTerm}"
-            </div>
-          )}
+          {!hasResults && <NotFound />}
 
           {hasResults &&
             Object.entries(filteredCategories).map(
