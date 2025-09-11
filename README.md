@@ -4,6 +4,12 @@ A modern, responsive dashboard application built with React, Vite, Tailwind CSS,
 
 ## ✨ Live Preview
 
+Check out the project here:  [Accuknox CNAPP Dashboard](https://accuknox-cnapp-dashboard.vercel.app/)
+
+<img width="1919" height="958" alt="demo1" src="https://github.com/user-attachments/assets/057230bb-2931-4142-9f4b-aedfb2d838a0" />
+<img width="1919" height="959" alt="demo2" src="https://github.com/user-attachments/assets/ee427f30-dad1-4b77-8843-cf170879bb5c" />
+
+
 ## 🚀 Features
 
 - **Dynamic Widget Management**: Create, Add and Remove widget cards seamlessly
