@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { FaClock } from "react-icons/fa";
-import { openAddWidgetModal } from "../features/widgetSlice";
+import { openAddWidgetModal, setSearchTerm } from "../features/widgetSlice";
 import CategorySection from "./CategorySection";
 import AddWidgetModal from "./AddWidgetModel";
 import Header from "./Header";
@@ -15,6 +15,7 @@ const Dashboard = () => {
 
   const handleAddWidget = () => {
     dispatch(openAddWidgetModal(null));
+    dispatch(setSearchTerm(""));
   };
 
   const filteredCategories = Object.entries(categories).reduce(

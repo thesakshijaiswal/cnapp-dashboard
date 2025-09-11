@@ -19,6 +19,10 @@ const Header = () => {
     return () => clearTimeout(handler);
   }, [localSearch, dispatch]);
 
+  useEffect(() => {
+    setLocalSearch(searchTerm);
+  }, [searchTerm]);
+
   const handleSearchChange = (e) => {
     setLocalSearch(e.target.value);
   };
