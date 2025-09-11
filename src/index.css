@@ -9,3 +9,23 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@layer utilities {
+  ::-webkit-scrollbar {
+    @apply h-[5px] w-[7px];
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-400;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-indigo-900;
+  }
+}
+
+.no-arrows::-webkit-outer-spin-button,
+.no-arrows::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
