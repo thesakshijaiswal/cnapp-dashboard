@@ -11,6 +11,7 @@ let nextId =
 
 const initialState = {
   categories: widgetData,
+  searchTerm: "",
   isAddWidgetModalOpen: false,
   selectedCategory: null,
 };
@@ -44,6 +45,10 @@ const widgetSlice = createSlice({
       }
     },
 
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
+    },
+
     openAddWidgetModal: (state, action) => {
       state.isAddWidgetModalOpen = true;
       state.selectedCategory = action.payload;
@@ -59,6 +64,7 @@ const widgetSlice = createSlice({
 export const {
   addWidget,
   removeWidget,
+  setSearchTerm,
   openAddWidgetModal,
   closeAddWidgetModal,
 } = widgetSlice.actions;
