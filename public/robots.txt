@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /private/
+
+Sitemap: https://accuknox-cnapp-dashboard.vercel.app/sitemap.xml
