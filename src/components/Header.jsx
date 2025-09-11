@@ -2,10 +2,26 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { TbBellRinging } from "react-icons/tb";
 import { FiSearch } from "react-icons/fi";
 import { FaUser } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { setSearchTerm } from "../features/widgetSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { searchTerm } = useSelector((state) => state.widgets);
+  const [localSearch, setLocalSearch] = useState(searchTerm);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      dispatch(setSearchTerm(localSearch));
+    }, 400);
+
+    return () => clearTimeout(handler);
+  }, [localSearch, dispatch]);
+
+  const handleSearchChange = (e) => {
+    setLocalSearch(e.target.value);
+  };
 
   return (
     <div className="border-b border-gray-200 bg-white">
@@ -27,9 +43,11 @@ const Header = () => {
             <div className="relative bg-blue-50">
               <FiSearch className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
               <input
-                id="Search"
+                id="search"
                 type="text"
                 placeholder="Search anything..."
+                value={localSearch}
+                onChange={handleSearchChange}
                 className="rounded-md border border-blue-400 py-2 pr-4 pl-10 text-sm focus:border-transparent focus:ring-2 focus:ring-blue-500 md:w-64 lg:w-lg"
               />
             </div>
@@ -76,8 +94,11 @@ const Header = () => {
             <div className="relative bg-blue-50">
               <FiSearch className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
               <input
+                id="mobile-search"
                 type="text"
                 placeholder="Search anything..."
+                value={localSearch}
+                onChange={handleSearchChange}
                 className="w-full rounded-md border border-blue-400 py-2 pr-4 pl-10 text-sm focus:border-transparent focus:ring-2 focus:ring-blue-500"
                 autoFocus
               />
