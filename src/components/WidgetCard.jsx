@@ -24,7 +24,7 @@ const WidgetCard = ({ widget, categoryName }) => {
     switch (widget.type) {
       case "donut":
         return (
-          <div className="flex items-center">
+          <div className="flex flex-col items-center sm:flex-row md:flex-col xl:flex-row">
             <div className="flex flex-col items-center justify-center">
               <div className="relative">
                 <div style={{ width: 200, height: 200 }}>
@@ -55,7 +55,7 @@ const WidgetCard = ({ widget, categoryName }) => {
               </div>
             </div>
 
-            <div className="ml-6 flex flex-col justify-center space-y-3">
+            <div className="flex flex-col justify-center space-y-3 lg:mt-4 xl:mt-0 2xl:ml-9">
               {widget.data.breakdown.map((item, index) => (
                 <div key={index} className="flex items-center">
                   <div
