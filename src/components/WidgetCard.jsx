@@ -159,6 +159,14 @@ const WidgetCard = ({ widget, categoryName }) => {
       case "text":
         return (
           <div className="flex h-48 flex-col items-center justify-center">
+            <img
+              src={barIcon}
+              alt="bar"
+              className="mb-4 h-16 w-16 text-gray-300"
+            />
+            <p className="text-center text-gray-700">
+              No Graph data available!
+            </p>
             <div className="text-center text-gray-700">{widget.data.text}</div>
           </div>
         );
