@@ -8,8 +8,7 @@ Check out the project here:  [Accuknox CNAPP Dashboard](https://accuknox-cnapp-d
 
 <img width="1919" height="958" alt="demo1" src="https://github.com/user-attachments/assets/057230bb-2931-4142-9f4b-aedfb2d838a0" />
 
-https://github.com/user-attachments/assets/07160b0f-a44f-4f38-a8c2-e1272d62e429
-
+https://github.com/user-attachments/assets/aaab4827-548c-4f53-919a-8abbe87b1928
 
 ## 🚀 Features
 
